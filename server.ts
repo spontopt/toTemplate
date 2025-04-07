@@ -27,3 +27,27 @@ app.post('/clean-metrics', (req: any, res: any) => {
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
+
+
+app.post('/order', (req: any, res: any) => {
+    const inputJson: any = req.body;
+
+
+    //function to order the metrics
+    const orderMetrics = (data: any) => {
+        var i = 0;
+        if (data.Metrics && Array.isArray(data.Metrics)) {
+            data.Metrics.forEach((metric: any) => {
+                metric.index = i;
+                i++;
+            });
+        }
+        
+        }
+
+    // Clean the integrations field
+    orderMetrics(inputJson);
+
+    // Send the modified JSON as the response
+    res.json(inputJson);
+});
